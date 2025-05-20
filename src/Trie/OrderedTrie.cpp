@@ -1,8 +1,8 @@
-#include "DSAG/Trie/Trie.hpp"
+#include "DSAG/Trie/OrderedTrie.hpp"
 
 namespace DSAG {
 
-void Trie::Insert(const std::string& word) {
+void OrderedTrie::Insert(const std::string& word) {
   Node_* node{root_.get()};
 
   for (char c: word) {
@@ -16,7 +16,7 @@ void Trie::Insert(const std::string& word) {
   node->isEnd = true;
 }
 
-bool Trie::Search(const std::string &word) const {
+bool OrderedTrie::Search(const std::string& word) const {
   Node_* node{root_.get()};
 
   for (char c: word) {
@@ -30,7 +30,7 @@ bool Trie::Search(const std::string &word) const {
   return node->isEnd;
 }
 
-bool Trie::StartsWith(const std::string &prefix) const {
+bool OrderedTrie::StartsWith(const std::string& prefix) const {
   Node_* node{root_.get()};
 
   for (char c: prefix) {
@@ -43,16 +43,16 @@ bool Trie::StartsWith(const std::string &prefix) const {
   return true;
 }
 
-void Trie::Print() const {
+void OrderedTrie::Print() const {
   std::string current{};
   DFS(root_.get(), current);
 }
 
-void Trie::PrintTree(char delim) const {
+void OrderedTrie::PrintTree(char delim) const {
   DFS_tree(root_.get(), delim, 0);
 }
 
-void Trie::DFS(const Node_ *node, std::string &current) const {
+void OrderedTrie::DFS(const Node_ *node, std::string &current) const {
   if (node->isEnd) {
     std::cout << current << '\n';
   }
@@ -64,7 +64,7 @@ void Trie::DFS(const Node_ *node, std::string &current) const {
   }
 }
 
-void Trie::DFS_tree(const Node_ *node, char delim, int indentLevel) const {
+void OrderedTrie::DFS_tree(const Node_ *node, char delim, int indentLevel) const {
   for (const auto& [ch, child]: node->children) {
     for (int i = 0; i < indentLevel; ++i) {
       std::cout << delim;

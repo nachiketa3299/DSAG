@@ -1,23 +1,22 @@
-#pragma once 
+#pragma once
 
 #include "DSAG/Trie/ITrie.hpp"
 
-#include <unordered_map>
-#include <string>
+#include <map>
 #include <memory>
+#include <string>
 
 namespace DSAG {
-
-class Trie: public ITrie {
+class OrderedTrie: public ITrie {
 private:
   struct Node_ {
-    std::unordered_map<char, std::unique_ptr<Node_>> children;
+    std::map<char, std::unique_ptr<Node_>> children;
     bool isEnd{false};
   };
 
 public:
-  Trie() = default;
-  ~Trie() = default;
+  OrderedTrie() = default;
+  ~OrderedTrie() = default;
 
 public:
   void Insert(const std::string& word) final;
@@ -25,13 +24,12 @@ public:
   bool StartsWith(const std::string& prefix) const final;
   void Print() const final;
   void PrintTree(char delim='-') const final;
-  
+
 private:
-  void DFS(const Node_* node, std::string& current) const;
+  void DFS(const Node_* node, std::string &current) const;
   void DFS_tree(const Node_* node, char delim, int indentLevel) const;
 
 private:
   std::unique_ptr<Node_> root_{std::make_unique<Node_>()};
 };
-
 }
