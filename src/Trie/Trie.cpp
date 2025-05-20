@@ -16,7 +16,7 @@ void Trie::Insert(const std::string& word) {
   node->isEnd = true;
 }
 
-bool Trie::Search(const std::string &word) const {
+bool Trie::Search(const std::string& word) const {
   Node_* node{root_.get()};
 
   for (char c: word) {
@@ -30,7 +30,7 @@ bool Trie::Search(const std::string &word) const {
   return node->isEnd;
 }
 
-bool Trie::StartsWith(const std::string &prefix) const {
+bool Trie::StartsWith(const std::string& prefix) const {
   Node_* node{root_.get()};
 
   for (char c: prefix) {
@@ -52,7 +52,7 @@ void Trie::PrintTree(char delim) const {
   DFS_tree(root_.get(), delim, 0);
 }
 
-void Trie::DFS(const Node_ *node, std::string &current) const {
+void Trie::DFS(const Node_ *node, std::string& current) const {
   if (node->isEnd) {
     std::cout << current << '\n';
   }
